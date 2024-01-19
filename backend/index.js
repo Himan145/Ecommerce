@@ -5,7 +5,13 @@ const AuthRoute=require('./Routes/AuthRoute.js');
 const app=express();
 connectDB();
 
-app.use(express.json());
+app.use(express.json(
+    {
+        origin:["https://crud-frontend-app.vercel.app"],
+        methods:["POST","PUT","DELETE","GET"],
+        credentials: true
+    }
+));
 app.use(cors());
 
 app.use('/api/auth',AuthRoute);
