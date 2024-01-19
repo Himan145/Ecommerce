@@ -15,8 +15,8 @@ const RegisterController=async(req,res)=>{
                 message:'Account already exist'
             })
         }
-        const hashedPassword=await hashPassword(password);
-        const newUser=await new UserModel({name,email,phone,address,password:hashedPassword}).save();
+        //const hashedPassword=await hashPassword(password);
+        const newUser=await new UserModel({name,email,phone,address,password}).save();
         res.status(201).send({
             success:true,
             message:'User Registered Successfully',
@@ -45,7 +45,8 @@ const LoginController=async(req,res)=>{
                 message:'Account does not exist'
             })
         }
-        const match=await comparePassword(password,user.password);
+        //const match=await comparePassword(password,user.password);
+        const match=(password===user.password);
         if(!match){
             return res.status(200).send({
                 success:false,
